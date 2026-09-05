@@ -1,0 +1,24 @@
+<header class="header">
+  <div class="inner">
+    <div class="nav">
+      <div class="nav__left">
+        <%= link_to image_tag("logo.png", class: :logo), root_path %>
+        </div>
+        <div class="nav__right">
+          <% if user_signed_in? %>
+          <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: :nav__logout %>
+          <%= link_to "New Proto", new_prototype_path, class: :nav__btn %>
+          <% else %>
+          <%= link_to "ログイン", new_user_session_path, class: :nav__sign-in %>
+          <%= link_to "新規登録", new_user_registration_path, class: :nav__sign-up %>
+          <% end %>
+          </div>
+          </div>
+          
+          <% if user_signed_in? %>
+          <div class="greeting">
+            こんにちは、<%= current_user.name %>さん
+            </div>
+            <% end %>
+            </div>
+</header>

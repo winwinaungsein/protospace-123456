@@ -1,0 +1,37 @@
+<div class="prototype-show">
+  <% if @prototype.image.attached? %>
+    <%= image_tag @prototype.image %>
+  <% end %>
+  <h1><%= @prototype.title %></h1>
+  <p><%= @prototype.catch_copy %></p>
+  <p><%= @prototype.concept %></p>
+  <p>投稿者: <%= @prototype.user.name %></p>
+
+  <% if @prototype.user == current_user %>
+    <%= link_to "編集", edit_prototype_path(@prototype), class: "prototype__btn" %>
+    <%= link_to "削除", prototype_path(@prototype), data: { turbo_method: :delete }, class: "prototype__btn"  %>
+    
+  <% end %>
+</div>
+
+  <div class="prototype__comments">
+    <% if user_signed_in? %>
+      <%= form_with model: [@prototype, @comment], local: true do |f| %>
+        <div class="field">
+          <%= f.label :content, "コメント" %><br />
+          <%= f.text_field :content, id: "comment_content" %>
+        </div>
+        <div class="actions">
+          <%= f.submit "送信する", class: :form__btn %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <h4>＜コメント一覧＞</h4>
+    <% @comments.each do |comment| %>
+      <p>
+        <strong><%= link_to comment.user.name, "/users/#{comment.user_id}" %>：</strong>
+        <%= comment.content %>
+      </p>
+    <% end %>
+  </div>

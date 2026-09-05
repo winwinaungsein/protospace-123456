@@ -1,0 +1,9 @@
+<div class="prototype-card">
+  <% if prototype.image.attached? %>
+    <%= link_to image_tag(prototype.image, class: "prototype-image"), prototype_path(prototype) %>
+  <% end %>
+  <h3><%= link_to prototype.title, prototype_path(prototype) %></h3>
+  <p><%= prototype.catch_copy %></p>
+  <p>投稿者: <%= prototype.user.name %></p>
+  <%= link_to "詳細を見る", prototype_path(prototype) %>
+</div>
