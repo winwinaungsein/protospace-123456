@@ -7,20 +7,27 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "style" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <header>
-      <nav>
+    <header class="header">
+      <div class="inner">
+      <%= link_to root_path, class: "logo" do %>
+      <p>SHARE THE PROTOTYPE</p>
+      <p>PROTO SPACE</p>
+      <% end %>
+      <nav class="nav">
         <% if user_signed_in? %>
-        <%= link_to "New Proto", new_prototype_path %>
-        <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
+        <%= link_to "New Proto", new_prototype_path, class: "nav__btn" %>
+        <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav__logout" %>
         <% else %>
-        <%= link_to "ログイン", new_user_session_path %>
-        <%= link_to "新規登録", new_user_registration_path %>
+        <%= link_to "ログイン", new_user_session_path,class: "nav__btn" %>
+        <%= link_to "新規登録", new_user_registration_path, class: "nav__btn" %>
         <% end %>
         </nav>
+        </div>
         </header>
     <%= yield %>
   </body>
