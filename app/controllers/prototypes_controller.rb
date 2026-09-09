@@ -1,7 +1,10 @@
 class PrototypesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   def destroy
-  end
+  @prototype = Prototype.find(params[:id])
+  @prototype.destroy if @prototype.user_id == current_user.id
+  redirect_to root_path
+ end
   
   def show 
     @prototype = Prototype.find(params[:id])

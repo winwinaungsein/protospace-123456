@@ -1,28 +1,16 @@
 <main class="main">
   <div class="inner">
-    <%# ログインしているときは以下の表示をする %>
-    <%if user_signed_in? %>
-    <div class="greeting">
+    <% if user_signed_in? %>
+      <div class="greeting">
       こんにちは、
-      <%= link_to "123456", user_path(current_user), class: :greeting__link %>
+      <%= current_user.name %>
       さん
     </div>
     <% end %>
-    <%# // ログインしているときは上記の表示をする %>
-    <div class="card_wrapper">
-      <%= render partial: "prototype", collection: @prototypes %>
-      <%# 投稿がある場合は一覧で表示する %>
-      <%# <div class="card"> %>
-        <%#= link_to image_tag("sample.jpg", class: :card__img ), user_path(prototype.user) %>
-        <%# <div class="card__body"> %>
-          <%#= link_to "プロトタイプのタイトル", ?0, class: :card__title %>
-          <%# <p class="card__summary"> %>
-            <%# プロトタイプのキャッチコピー %>
-          <%# </p> %>
-          <%#= link_to "by 投稿者の名前", ?0, class: :card__user %>
-        <%# </div> %>
-      <%# </div> %>
-      <%# // 投稿がある場合は一覧で表示する %>
+    <div class="card__wrapper">
+      <% @prototypes.each do |prototype| %>
+       <%= render "prototype", prototype: prototype %>
+       <% end%>
     </div>
   </div>
 </main>
